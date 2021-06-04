@@ -1,6 +1,6 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require('apollo-server');
 
-const typeDefs = gql `
+const typeDefs = gql`
 type Query {
   # This query will be protected so only authenticated users can access it
   getAllFarm : [Farm]

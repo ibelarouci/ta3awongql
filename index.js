@@ -11,7 +11,7 @@ const { AccountsPassword } = require("@accounts/password");
 
 
 // We connect mongoose to our local mongodb database
-mongoose.connect("mongodb://localhost:27017/accounts-js-server", {
+mongoose.connect("mongodb://localhost:27017/ta3awongql", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
