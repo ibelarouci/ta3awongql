@@ -30,10 +30,10 @@ const resolvers = {
         farmHarvest: ({ farmHarvest }, args, { injector }) => {
             return Farm.findById(farmHarvest);
         },
-        startDate: ({ startDate }, args, { injector }) => {
-            return new Date(startDate).toDateString();
+      // startDate: ({ startDate }, args, { injector }) => {
+         //  return new Date(startDate).toDateString();
 
-        },
+     //  },
     },
     HarvestDetail: { id: ({ _id }) => { return _id } },
     Query: {
