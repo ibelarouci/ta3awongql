@@ -23,8 +23,8 @@ const resolvers = {
     },
     Harvest: {
         id: ({ _id }) => { return _id },
-        harvestDetail: ({ harvestdetail }, args, { injector }) => {
-            return HarvestDetail.findById(harvestdetail)
+        harvestDetail: ({ harvestDetail }, args, { injector }) => {
+            return HarvestDetail.findById(harvestDetail)
         },
 
         farmHarvest: ({ farmHarvest }, args, { injector }) => {
