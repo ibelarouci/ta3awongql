@@ -8,6 +8,9 @@ const typeDefs = require('./graphql/schema');
 const { Mongo } = require("@accounts/mongo");
 const { AccountsServer } = require("@accounts/server");
 const { AccountsPassword } = require("@accounts/password");
+const permissions = require('./graphql/permission');
+const { applyMiddleware } =require( 'graphql-middleware');
+
 
 
 // We connect mongoose to our local mongodb database
@@ -29,7 +32,7 @@ const accountsPassword = new AccountsPassword({
 const accountsServer = new AccountsServer({
     ambiguousErrorMessages: false,
 
-    enableAutologin: true,
+    enableAutologin: false,
     // We link the mongo adapter to the server
     db: accountsMongo,
     // Replace this value with a strong random secret
@@ -42,20 +45,22 @@ const accountsServer = new AccountsServer({
 
 
 
+
 // We generate the accounts-js GraphQL module
 const accountsGraphQL = AccountsModule.forRoot({ accountsServer });
+
 
 // A new schema is created combining our schema and the accounts-js schema
 const schema = makeExecutableSchema({
     typeDefs: mergeTypeDefs([typeDefs, accountsGraphQL.typeDefs]),
     resolvers: mergeResolvers([accountsGraphQL.resolvers, resolvers]),
-
-    schemaDirectives: {
-        ...accountsGraphQL.schemaDirectives
-    }
+    
 });
-
-const server = new ApolloServer({ schema, context: accountsGraphQL.context });
+//schema = applyMiddleware(schema, permissions);
+const server = new ApolloServer({ schema:applyMiddleware(schema, permissions), 
+ context: accountsGraphQL.context
+  
+});
 
 // The `listen` method launches a web server.
 server.listen().then(({ url }) => {

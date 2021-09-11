@@ -18,6 +18,7 @@
     "apollo-server": "^2.25.0",
     "apollo-server-express": "^2.25.0",
     "graphql": "^15.5.0",
+    "graphql-shield": "^7.5.0",
     "mongodb": "^3.6.4",
     "mongoose": "^5.11.14"
   }
